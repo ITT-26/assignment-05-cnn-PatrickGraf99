@@ -28,3 +28,19 @@ frame you can use the mouse to select hands, that means click once to select the
 click again to select the bottom right corner of the bounding box. After that enter a label in the console and press 
 Enter. Repeat this step for every hand in the picture. Once you are done press s. The image will then be saved and the 
 bboxes and labels will be added to annot-name.json
+
+**I have not tested this script thoroughly yet, but I have deep trust that it does what I expect it to**
+
+## Example
+Start the script and make any gesture, press f to freeze the frame
+
+on the frame click once to select the top left point of the bounding box around your hand. Click again, selecting the 
+bottom right corner this time
+
+When prompted by the console, type the label you want to give (e.g. like) and then Enter
+
+Do this for every hand and press s. This will save the image as 'uuid.jpg' and add the annotations to annot-name.json
+
+After pressing s the program resets and you can start over
+
+Press q to quit
