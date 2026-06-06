@@ -1,5 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/cMaQVOgt)
 
+# Environment
+
+A requirments.txt is included in the project to set up a virtual environment (I assume you know how to do this at this
+point), I used Python 3.13 for my environment. 
 
 # Task 1: Hyperparameters
 
