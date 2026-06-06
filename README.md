@@ -44,3 +44,41 @@ Do this for every hand and press s. This will save the image as 'uuid.jpg' and a
 After pressing s the program resets and you can start over
 
 Press q to quit
+
+
+# Task 3: Gesture controlled camera app
+
+The camera app should be launched using the `camera_launcher.py` and can take 3 named args. -o for the output dir of 
+any saved picture (output directory will be same as camera_app.py by default), -m for the model the cnn should use
+(The selection is between all those I trained in task 1, the default is '64' since it performed best) and -c for the 
+camera id. I recommend leaving them all blank, no arg is required
+
+Launch the script with e.g. `python path/to/camera_launcher.py -m 64` 
+
+Disclaimer: Initializing may take some time, especially on the first run (at least that was the case for me). Don't 
+worry, the app works. It is vital you have the .keras files in 01-hyperparameters and the hand_landmarker.task file
+in 03-camera-app. All files are included in the git repo.
+
+Control schemes are offered via gestures or keyboard input. By default, the gesture recognition is **turned off** and
+has to be enabled by pressing `p` after starting the app. Here is a table displaying the control schemes
+
+| Action                         | keyboard | Gesture   |
+|--------------------------------|----------|-----------|
+| Toggle gesture controls on/off | `p`      | None      |
+| Quit application               | `q`      | None      |
+| Toggle Grayscale filter        | `g`      | `like`    |
+| Toggle blur                    | `b`      | `dislike` |
+| Toggle canny/edge filter       | `c`      | `peace`   |
+| Start selfie timer             | `t`      | `fist`    |
+
+The app has an automatic detection pause for 3 seconds after a gesture is detected. The keyboard controls remain 
+unaffected by this. 
+
+Applying one filter does not reset other filter, multiple filters can be active at the same time.
+
+When the selfie timer is started, the controls (apart from quitting the application) will be blocked. It is not a bug if
+they do not work but intended that way.
+
+The selfie timer is set to 3 seconds (and can right now only be changed by modifying the value in the code)
+
+All selfies taken will have their date and time as a filename so you can easily find them
