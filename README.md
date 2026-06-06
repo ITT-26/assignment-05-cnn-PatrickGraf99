@@ -25,6 +25,15 @@ accuracy one can probably assume that adding more data increases the likeliness 
 the right data to reach 100% accuracy
 
 
+## Update
+
+What you just read was what I initially figured out and tested.
+
+However, when training models to recognize more than just 2 gestures I stumbled upon the fact that my results changed
+wildly. Training time spiked immensely and somehow the 64x64 model is just better now!? Some trends stay consistent
+(like training time) so maybe the sweet spot just shifts for more complex models (with more outputs)
+
+
 # Task 2: Gathering a dataset
 
 To use the annotater simply make any gesture you want to capture and press f to freeze the frame. Once you have a frozen
