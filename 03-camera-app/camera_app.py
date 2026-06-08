@@ -1,3 +1,4 @@
+import math
 import sys
 import time
 from datetime import datetime
@@ -104,18 +105,25 @@ class CameraApp:
         display_image = self.frame.copy()
         for camera_filter in self.active_camera_filters:
             display_image = self.image_processor.apply_filter(display_image, camera_filter)
-        cv2.imshow(self.WINDOW_NAME, display_image)
         if self.timer_running:
             now = time.time()
+            remaining = max(0, math.ceil(self.timer_end - now))
+            display_image = cv2.putText(display_image, f'Selfie in {remaining}', (20, 40),
+                                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
             if now >= self.timer_end:
                 print('Timer ran down, taking selfie')
                 self.timer_running = False
                 self.save_picture()
+                # Turn entire frame white to imitate a flash effect when taking a picture
+                display_image = cv2.rectangle(display_image, (0, 0), (display_image.shape[1], display_image.shape[0]),
+                                              (255, 255, 255), -1)
         if not self.detection_ready:
             now = time.time()
             if now >= self.detection_ready_time:
                 print('Ready for new gesture')
                 self.detection_ready = True
+        cv2.imshow(self.WINDOW_NAME, display_image)
+
 
     def handle_gesture_detected(self, label):
         print('Handling detected gesture {label}'.format(label=label))

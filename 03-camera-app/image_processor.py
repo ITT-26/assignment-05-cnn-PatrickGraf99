@@ -99,12 +99,34 @@ class ImageProcessor:
         return cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
 
     def _apply_portrait(self, target_image: np.ndarray) -> np.ndarray:
-        """
-        Applies a portrait filter to the target image.
-        :param target_image: The image to be manipulated.
-        :return: The modified image.
-        """
-        return cv2.GaussianBlur(target_image, (31, 31), 0)
+        h, w = target_image.shape[:2]
+
+        blurred = cv2.GaussianBlur(target_image, (31, 31), 0)
+
+        mask = np.zeros((h, w), dtype=np.uint8)
+
+        cv2.ellipse(
+            mask,
+            (w // 2, h // 2),
+            (w // 4, h // 3),
+            0,
+            0,
+            360,
+            255,
+            -1
+        )
+
+        mask = cv2.GaussianBlur(mask, (51, 51), 0)
+
+        mask = mask.astype(np.float32) / 255.0
+        mask = cv2.merge([mask, mask, mask])
+
+        result = (
+                target_image * mask +
+                blurred * (1 - mask)
+        ).astype(np.uint8)
+
+        return result
 
     def _apply_canny(self, target_image: np.ndarray) -> np.ndarray:
         gray = cv2.cvtColor(target_image, cv2.COLOR_BGR2GRAY)
