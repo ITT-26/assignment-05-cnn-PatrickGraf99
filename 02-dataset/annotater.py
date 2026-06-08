@@ -111,15 +111,15 @@ class ImageProcessor:
 
     def save_annot(self):
         # Check if file exists and create it if not
-        if not os.path.exists('annot-name.json'):
-            with open('annot-name.json', 'w') as file:
+        if not os.path.exists('annot-patrick.json'):
+            with open('annot-patrick.json', 'w') as file:
                 json.dump({}, file, indent=4)
         # Save the original freeze-frame with a random uuid
         annot_id = str(uuid.uuid4())
         cv2.imwrite(f'{annot_id}.jpg', self.img_frozen_original)
 
         # Try loading the json in the annot file
-        with open('annot-name.json', 'r') as file:
+        with open('annot-patrick.json', 'r') as file:
             try:
                 json_data = json.load(file)
             except json.decoder.JSONDecodeError:
@@ -130,7 +130,7 @@ class ImageProcessor:
             'labels': self.labels
         }
         # Then write all our data
-        with open('annot-name.json', 'w') as file:
+        with open('annot-patrick.json', 'w') as file:
             json.dump(json_data, file, indent=4)
         # And reset everything
         self.reset()
